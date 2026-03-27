@@ -33,11 +33,6 @@ jobs:
           echo "=== 构建完成 ==="
           echo "检查 out 目录:"
           ls -la out/ || echo "out 目录不存在"
-          if [ -f "out/index.html" ]; then
-            echo "✅ index.html 存在"
-          else
-            echo "❌ index.html 不存在"
-          fi
         env:
           NODE_ENV: production
       
@@ -48,3 +43,4 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: '.'
           command: pages deploy out --project-name=ai-journal-mvp --branch=main
+          preCommands: echo "=== 部署前检查 ===" && ls -la out/
