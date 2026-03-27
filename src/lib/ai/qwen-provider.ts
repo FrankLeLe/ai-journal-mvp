@@ -44,7 +44,7 @@ export class QwenProvider implements AIProvider {
         })
       });
 
-      const data = await response.json();
+      const data: any = await response.json();
       const content = data.output?.text || '{}';
       
       const mood = JSON.parse(content);
@@ -95,7 +95,7 @@ export class QwenProvider implements AIProvider {
         })
       });
 
-      const data = await response.json();
+      const data: any = await response.json();
       return data.output?.text || '感谢分享，我在这里倾听你的心声。';
     } catch (error) {
       console.error('Qwen response error:', error);

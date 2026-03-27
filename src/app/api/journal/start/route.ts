@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   try {
-    const { user_id } = await request.json();
+    const { user_id }: { user_id: string } = await request.json();
     
     // 模拟创建新日记（临时方案，后续集成 Supabase）
     const entryId = `entry-${Date.now()}`;

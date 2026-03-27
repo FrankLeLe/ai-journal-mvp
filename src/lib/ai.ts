@@ -31,7 +31,7 @@ export async function analyzeMood(text: string) {
     })
   });
 
-  const data = await response.json();
+  const data: any = await response.json();
   const content = data.output?.text || '{}';
   
   try {
@@ -72,7 +72,7 @@ export async function generateResponse(userMessage: string, mood?: any) {
     })
   });
 
-  const data = await response.json();
+  const data: any = await response.json();
   return data.output?.text || '感谢分享，我在这里倾听你的心声。';
 }
 

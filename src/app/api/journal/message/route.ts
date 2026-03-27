@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   try {
-    const { entry_id, message, user_id } = await request.json();
+    const { entry_id, message, user_id }: { entry_id: string, message: string, user_id: string } = await request.json();
     
     // 模拟 AI 回复（临时方案，后续集成 Qwen API）
     const aiResponses = [
