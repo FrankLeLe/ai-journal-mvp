@@ -12,6 +12,10 @@ jobs:
       contents: read
       deployments: write
     
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,23 +33,18 @@ jobs:
       - name: Build (Static Export)
         run: |
           echo "=== 开始构建 ==="
-          # 构建会输出 API 路由的警告，但实际会成功
           npm run build 2>&1 | tee build.log || true
           echo "=== 构建完成 ==="
-          # 验证 out 目录存在
           if [ -f "out/index.html" ]; then
-            echo "✅ 构建成功，out/index.html 存在"
+            echo "✅ 构建成功"
             ls -la out/
           else
-            echo "❌ 构建失败，out/index.html 不存在"
+            echo "❌ 构建失败"
+            cat build.log
             exit 1
           fi
-        env:
-          NODE_ENV: production
       
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          command: |
-            pages deploy out --project-name=ai-journal-mvp --branch=main
+        run: |
+          echo "=== 开始部署 ==="
+          npx wrangler pages deploy out --project-name=ai-journal-mvp --branch=main
