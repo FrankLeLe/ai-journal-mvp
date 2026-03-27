@@ -28,18 +28,25 @@ jobs:
           cache-dependency-path: package-lock.json
       
       - name: Install dependencies
-        run: npm ci
+        run: |
+          echo "=== Node 版本 ==="
+          node -v
+          echo "=== npm 版本 ==="
+          npm -v
+          echo "=== 安装依赖 ==="
+          npm install
       
       - name: Build (Static Export)
         run: |
           echo "=== 开始构建 ==="
-          npm run build 2>&1 | tee build.log || true
-          echo "=== 构建完成 ==="
+          npm run build 2>&1 | tee build.log
+          BUILD_EXIT_CODE=${PIPESTATUS[0]}
+          echo "=== 构建完成 (退出码：$BUILD_EXIT_CODE) ==="
           if [ -f "out/index.html" ]; then
             echo "✅ 构建成功"
             ls -la out/
           else
-            echo "❌ 构建失败"
+            echo "❌ 构建失败，out/index.html 不存在"
             cat build.log
             exit 1
           fi
