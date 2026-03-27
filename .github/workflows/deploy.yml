@@ -30,17 +30,18 @@ jobs:
       - name: Install dependencies
         run: npm install
       
-      - name: Build (Static Export)
+      - name: Build
+        run: npm run build
+        continue-on-error: true
+      
+      - name: Verify build output
         run: |
-          set +e  # 禁用退出码检查
-          echo "=== 开始构建 ==="
-          npm run build
           echo "=== 检查构建产物 ==="
           if [ -f "out/index.html" ]; then
-            echo "✅ 构建成功，out/index.html 存在"
+            echo "✅ 构建成功"
             ls -la out/
           else
-            echo "❌ 构建失败，out/index.html 不存在"
+            echo "❌ 构建失败"
             exit 1
           fi
       
