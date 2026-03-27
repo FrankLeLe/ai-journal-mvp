@@ -29,10 +29,10 @@ jobs:
       - name: Build (Static Export)
         run: |
           echo "=== 开始构建 ==="
-          npm run build 2>&1 || true
+          npm run build
           echo "=== 构建完成 ==="
           echo "检查 out 目录:"
-          ls -la out/ || echo "out 目录不存在"
+          ls -la out/
         env:
           NODE_ENV: production
       
@@ -40,7 +40,5 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: '.'
-          command: pages deploy out --project-name=ai-journal-mvp --branch=main
-          preCommands: echo "=== 部署前检查 ===" && ls -la out/
+          command: |
+            pages deploy out --project-name=ai-journal-mvp --branch=main
