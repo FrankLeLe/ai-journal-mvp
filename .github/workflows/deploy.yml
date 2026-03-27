@@ -28,8 +28,15 @@ jobs:
       
       - name: Build (Static Export)
         run: npm run build
+        continue-on-error: false
         env:
           NODE_ENV: production
+      
+      - name: Verify build output
+        run: |
+          echo "=== 检查构建产物 ==="
+          ls -la out/ || echo "out 目录不存在"
+          ls -la .next/ || echo ".next 目录不存在"
       
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
