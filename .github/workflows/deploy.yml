@@ -24,21 +24,18 @@ jobs:
           cache-dependency-path: package-lock.json
       
       - name: Install dependencies
-        run: |
-          echo "=== 清理安装依赖 ==="
-          npm ci --verbose 2>&1 | tail -50
+        run: npm ci
       
-      - name: Build
-        run: |
-          echo "=== 开始构建 ==="
-          npm run build 2>&1 | tail -100
-          echo "=== 构建完成 ==="
-          echo "检查构建产物:"
-          ls -la .next/ || echo ".next 目录不存在"
+      - name: Build (Static Export)
+        run: npm run build
+        env:
+          NODE_ENV: production
       
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy .next --project-name=ai-journal-mvp --branch=main
+          # 部署 out 目录（静态导出）
+          workingDirectory: '.'
+          command: pages deploy out --project-name=ai-journal-mvp --branch=main
