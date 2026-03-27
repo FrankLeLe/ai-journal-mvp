@@ -1,0 +1,34 @@
+# 本地开发环境变量
+.dev.vars
+.env
+.env.local
+
+# 构建产物
+.next/
+dist/
+build/
+out/
+
+# 依赖
+node_modules/
+
+# 类型定义（自动生成）
+worker-configuration.d.ts
+
+# 日志
+*.log
+
+# Wrangler
+.wrangler/
+
+# IDE
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# 临时文件
+*.tmp
+*.swp
+*~
