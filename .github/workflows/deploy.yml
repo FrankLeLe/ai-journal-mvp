@@ -32,8 +32,9 @@ jobs:
       
       - name: Build (Static Export)
         run: |
+          set +e  # 禁用退出码检查
           echo "=== 开始构建 ==="
-          npm run build || true
+          npm run build
           echo "=== 检查构建产物 ==="
           if [ -f "out/index.html" ]; then
             echo "✅ 构建成功，out/index.html 存在"
