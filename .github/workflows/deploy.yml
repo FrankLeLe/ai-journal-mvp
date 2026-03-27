@@ -34,6 +34,19 @@ jobs:
         run: npm run build
         continue-on-error: true
       
+      - name: Debug build output
+        run: |
+          echo "=== 当前目录 ==="
+          pwd
+          echo "=== 列出所有目录 ==="
+          ls -la
+          echo "=== 检查 .next 目录 ==="
+          ls -la .next/ 2>/dev/null || echo ".next 不存在"
+          echo "=== 检查 out 目录 ==="
+          ls -la out/ 2>/dev/null || echo "out 不存在"
+          echo "=== 查找 index.html ==="
+          find . -name "index.html" -type f 2>/dev/null | head -10
+      
       - name: Verify build output
         run: |
           echo "=== 检查构建产物 ==="
@@ -41,7 +54,7 @@ jobs:
             echo "✅ 构建成功"
             ls -la out/
           else
-            echo "❌ 构建失败"
+            echo "❌ 构建失败，out/index.html 不存在"
             exit 1
           fi
       
