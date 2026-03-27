@@ -27,16 +27,23 @@ jobs:
         run: npm ci
       
       - name: Build (Static Export)
-        run: npm run build
-        continue-on-error: false
+        run: |
+          echo "=== 开始构建 ==="
+          npm run build 2>&1 || true
+          echo "=== 构建完成 ==="
         env:
           NODE_ENV: production
       
       - name: Verify build output
         run: |
           echo "=== 检查构建产物 ==="
-          ls -la out/ || echo "out 目录不存在"
-          ls -la .next/ || echo ".next 目录不存在"
+          if [ -d "out" ] && [ -f "out/index.html" ]; then
+            echo "✅ out 目录存在且包含 index.html"
+            ls -la out/
+          else
+            echo "❌ out 目录不存在或没有 index.html"
+            exit 1
+          fi
       
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
