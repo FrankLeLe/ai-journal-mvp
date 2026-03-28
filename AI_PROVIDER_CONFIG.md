@@ -24,19 +24,7 @@ NEXT_PUBLIC_DEFAULT_MODEL=anthropic/claude-opus-4.6
 
 ### 旧配置（已废弃）
 
-```bash
-# 阿里云百炼（Qwen）- 已废弃
-# NEXT_PUBLIC_QWEN_API_KEY=sk-xxx
-
-# Anthropic Claude - 已废弃
-# NEXT_PUBLIC_CLAUDE_API_KEY=sk-ant-xxx
-
-# DeepSeek - 已废弃
-# NEXT_PUBLIC_DEEPSEEK_API_KEY=sk-xxx
-
-# Moonshot (Kimi) - 已废弃
-# NEXT_PUBLIC_MOONSHOT_API_KEY=sk-xxx
-```
+不再需要配置多个 API Key，统一使用 AI Router。
 
 ## 添加新 Provider
 
