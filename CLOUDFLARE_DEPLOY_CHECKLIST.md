@@ -105,7 +105,7 @@ wrangler pages deploy .next --project-name=ai-journal-mvp
 ## 🔗 相关资源
 
 - **在线演示**: https://1720f70e.ai-journal-mvp.pages.dev
-- **后端服务**: https://ai-router-worker.zdjingji.workers.dev
+- **后端服务**: 配置环境变量 `NEXT_PUBLIC_API_BASE`
 - **GitHub 仓库**: https://github.com/FrankLeLe/ai-journal-mvp
 
 ---

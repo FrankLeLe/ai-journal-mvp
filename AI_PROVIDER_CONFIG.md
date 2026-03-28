@@ -15,7 +15,7 @@ NEXT_PUBLIC_API_KEY=your_api_key_here
 NEXT_PUBLIC_DEFAULT_MODEL=anthropic/claude-opus-4.6
 
 # API Base URL（可选）
-# NEXT_PUBLIC_API_BASE=https://ai-router-worker.zdjingji.workers.dev
+# NEXT_PUBLIC_API_BASE=https://your-worker.your-account.workers.dev
 ```
 
 ## 切换到 AI Router

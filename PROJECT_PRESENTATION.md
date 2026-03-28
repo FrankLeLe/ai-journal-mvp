@@ -146,7 +146,7 @@ const getModel = (language: string, category: string) => {
                      ↓
 ┌─────────────────────────────────────────────────────────┐
 │              Cloudflare Workers (后端路由)               │
-│  ai-router-worker.zdjingji.workers.dev                  │
+│  your-worker.your-account.workers.dev                   │
 │  - Hono 轻量框架                                        │
 │  - 模型智能路由                                         │
 │  - API 认证 + 速率限制                                   │
@@ -402,7 +402,7 @@ V3.0: 平台化 (开放 API + 第三方集成)
 |------|------|
 | **在线演示** | https://1720f70e.ai-journal-mvp.pages.dev |
 | **GitHub 仓库** | https://github.com/FrankLeLe/ai-journal-mvp |
-| **后端服务** | https://ai-router-worker.zdjingji.workers.dev |
+| **后端服务** | 配置环境变量 `NEXT_PUBLIC_API_BASE` |
 | **测试页面** | https://1720f70e.ai-journal-mvp.pages.dev/test-router |
 
 ### **文档**
@@ -450,7 +450,7 @@ V3.0: 平台化 (开放 API + 第三方集成)
 # .env.local
 NEXT_PUBLIC_API_KEY=your_api_key_here
 NEXT_PUBLIC_DEFAULT_MODEL=anthropic/claude-opus-4.6
-NEXT_PUBLIC_API_BASE=https://ai-router-worker.zdjingji.workers.dev
+NEXT_PUBLIC_API_BASE=https://your-worker.your-account.workers.dev
 ```
 
 ### **C. 部署命令**
