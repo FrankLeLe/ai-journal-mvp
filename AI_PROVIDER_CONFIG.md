@@ -5,59 +5,47 @@
 在 `.env.local` 中配置：
 
 ```bash
-# 当前使用的 AI Provider
-# 可选值：qwen | claude | deepseek | moonshot
-NEXT_PUBLIC_AI_PROVIDER=qwen
+# 当前使用的 AI Provider（已废弃，使用 AI Router）
+# NEXT_PUBLIC_AI_PROVIDER=qwen
 
-# 阿里云百炼（Qwen）
-NEXT_PUBLIC_QWEN_API_KEY=sk-xxx
+# AI Router API Key
+NEXT_PUBLIC_API_KEY=your_api_key_here
 
-# Anthropic Claude
-NEXT_PUBLIC_CLAUDE_API_KEY=sk-xxx
+# 默认模型
+NEXT_PUBLIC_DEFAULT_MODEL=anthropic/claude-opus-4.6
 
-# DeepSeek
-NEXT_PUBLIC_DEEPSEEK_API_KEY=sk-xxx
-
-# Moonshot (Kimi)
-NEXT_PUBLIC_MOONSHOT_API_KEY=sk-xxx
+# API Base URL（可选）
+# NEXT_PUBLIC_API_BASE=https://ai-router-worker.zdjingji.workers.dev
 ```
 
-## 切换 Provider
+## 切换到 AI Router
 
-### 方法 1: 修改环境变量
+现在项目使用 `ai-router-worker` 统一路由，无需配置多个 Provider。
+
+### 旧配置（已废弃）
 
 ```bash
-# 使用 Qwen
-NEXT_PUBLIC_AI_PROVIDER=qwen
+# 阿里云百炼（Qwen）- 已废弃
+# NEXT_PUBLIC_QWEN_API_KEY=sk-xxx
 
-# 使用 Claude
-NEXT_PUBLIC_AI_PROVIDER=claude
+# Anthropic Claude - 已废弃
+# NEXT_PUBLIC_CLAUDE_API_KEY=sk-ant-xxx
 
-# 使用 DeepSeek
-NEXT_PUBLIC_AI_PROVIDER=deepseek
-```
+# DeepSeek - 已废弃
+# NEXT_PUBLIC_DEEPSEEK_API_KEY=sk-xxx
 
-### 方法 2: 运行时切换（开发环境）
-
-```typescript
-import { getAIProvider, getCurrentProvider } from '@/lib/ai';
-
-const provider = getAIProvider();
-console.log('Current provider:', getCurrentProvider());
+# Moonshot (Kimi) - 已废弃
+# NEXT_PUBLIC_MOONSHOT_API_KEY=sk-xxx
 ```
 
 ## 添加新 Provider
 
-1. 创建 `src/lib/ai/xxx-provider.ts`
-2. 实现 `AIProvider` 接口
-3. 在 `provider-factory.ts` 中添加配置
-4. 在 `provider-factory.ts` 的 `getAIProvider()` 中添加 case
+在 `ai-router-worker` 中添加，无需修改前端代码。
 
 ## 成本对比
 
 | Provider | 价格/1K tokens | 月成本（MVP） | 推荐场景 |
 |----------|---------------|--------------|----------|
-| Qwen | ¥0.008 | ¥200 | 中文对话 ✅ |
-| DeepSeek | ¥0.001 | ¥50 | 成本敏感 |
-| Claude | $0.015 | $50 | 英文对话 |
-| Moonshot | ¥0.012 | ¥300 | 长上下文 |
+| Claude Opus 4.6 | $0.005 / $0.025 | $50 | 最强推理 ✅ |
+| GPT-4o-mini | $0.00015 / $0.0006 | $10 | 性价比 ✅ |
+| DeepSeek-V3.2 | $0.0002 / $0.00032 | $5 | 极致性价比 |

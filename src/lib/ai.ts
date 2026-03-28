@@ -1,8 +1,6 @@
 // lib/ai.ts
-// 使用阿里云百炼 API（Qwen）
-
-const QWEN_API_KEY = process.env.QWEN_API_KEY || 'sk-xxx';
-const QWEN_API_URL = 'https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation';
+// 已废弃 - 迁移到 AI Router
+// 请使用 src/lib/router.ts
 
 /**
  * 情绪分析

@@ -25,10 +25,8 @@
 
 4. **环境变量**
    ```
-   NEXT_PUBLIC_AI_PROVIDER = qwen
-   NEXT_PUBLIC_QWEN_API_KEY = sk-xxx（使用现有）
-   NEXT_PUBLIC_SUPABASE_URL = https://xxx.supabase.co
-   NEXT_PUBLIC_SUPABASE_ANON_KEY = xxx
+   NEXT_PUBLIC_API_KEY = your_api_key_here
+   NEXT_PUBLIC_DEFAULT_MODEL = anthropic/claude-opus-4.6
    ```
 
 5. **保存并部署**
@@ -49,33 +47,23 @@ wrangler login
 wrangler pages deploy .next --project-name=ai-journal-mvp
 ```
 
-## Supabase 配置
+## AI Router 配置
 
-### Step 1: 创建项目
-```
-1. 访问 https://supabase.com
-2. 登录（GitHub/Email）
-3. New Project
-4. 项目名：ai-journal-mvp
-5. 区域：us-east-1 或 eu-central-1
-6. 创建
+### 部署 ai-router-worker
+
+```bash
+cd ai-router-worker
+npx wrangler deploy
 ```
 
-### Step 2: 配置数据库
-```
-1. SQL Editor → New Query
-2. 粘贴 DATABASE_SCHEMA.md 中的 SQL
-3. 运行
-```
+### 设置 Secrets
 
-### Step 3: 获取配置
-```
-1. Settings → API
-2. 复制 Project URL
-3. 复制 anon public key
-4. 添加到环境变量
+```bash
+wrangler secret put GMI_API_KEY
+wrangler secret put JWT_SECRET
 ```
 
 ---
 
 *创建时间：2026-03-26 18:15*
+*更新时间：2026-03-28 - 迁移到 AI Router*

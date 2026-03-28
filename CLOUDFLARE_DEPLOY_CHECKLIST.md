@@ -1,6 +1,7 @@
 # Cloudflare Pages 部署检查清单
 
-**部署时间**: 2026-03-26 20:25  
+**部署时间**: 2026-03-28  
+**版本**: V1.0.0
 
 ---
 
@@ -16,10 +17,8 @@
 
 ### **2. 环境变量**
 ```
-✅ NEXT_PUBLIC_AI_PROVIDER = qwen
-⏳ NEXT_PUBLIC_QWEN_API_KEY = sk-xxx（使用现有）
-⏳ NEXT_PUBLIC_SUPABASE_URL = https://xxx.supabase.co
-⏳ NEXT_PUBLIC_SUPABASE_ANON_KEY = xxx
+✅ NEXT_PUBLIC_API_KEY = your_api_key_here
+✅ NEXT_PUBLIC_DEFAULT_MODEL = anthropic/claude-opus-4.6
 ```
 
 ### **3. wrangler 配置**
@@ -57,10 +56,8 @@ Root directory: /
 **Step 4: 环境变量**
 ```
 添加以下环境变量：
-- NEXT_PUBLIC_AI_PROVIDER = qwen
-- NEXT_PUBLIC_QWEN_API_KEY = sk-xxx
-- NEXT_PUBLIC_SUPABASE_URL = https://xxx.supabase.co
-- NEXT_PUBLIC_SUPABASE_ANON_KEY = xxx
+- NEXT_PUBLIC_API_KEY = your_api_key_here
+- NEXT_PUBLIC_DEFAULT_MODEL = anthropic/claude-opus-4.6
 ```
 
 **Step 5: 保存并部署**
@@ -88,21 +85,30 @@ wrangler pages deploy .next --project-name=ai-journal-mvp
 
 ### **检查清单**
 ```
-⏳ 构建成功
-⏳ 部署成功
-⏳ HTTPS 正常
-⏳ 自定义域名（可选）
-⏳ 环境变量生效
+✅ 构建成功
+✅ 部署成功
+✅ HTTPS 正常
+✅ 自定义域名（可选）
+✅ 环境变量生效
 ```
 
 ### **测试清单**
 ```
-⏳ 首页加载测试
-⏳ API 路由测试
-⏳ 移动端适配测试
-⏳ 性能测试（<2 秒）
+✅ 首页加载测试
+✅ API 路由测试
+✅ 移动端适配测试
+✅ 性能测试（<2 秒）
 ```
 
 ---
 
-*部署时间：2026-03-26 20:25*
+## 🔗 相关资源
+
+- **在线演示**: https://1720f70e.ai-journal-mvp.pages.dev
+- **后端服务**: https://ai-router-worker.zdjingji.workers.dev
+- **GitHub 仓库**: https://github.com/FrankLeLe/ai-journal-mvp
+
+---
+
+*部署时间：2026-03-28*
+*版本：V1.0.0*
