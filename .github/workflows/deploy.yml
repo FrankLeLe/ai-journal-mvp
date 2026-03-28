@@ -32,12 +32,13 @@ jobs:
           cache-dependency-path: package-lock.json
       
       - name: Install dependencies
-        run: npm ci --legacy-peer-deps
+        run: npm install --legacy-peer-deps
       
       - name: Build (disable Turbopack for static export)
-        run: NODE_OPTIONS="--no-experimental-require-module" npx --no-install next build
+        run: ./node_modules/.bin/next build
         env:
           NEXT_TELEMETRY_DISABLED: 1
+          NODE_OPTIONS: "--no-experimental-require-module"
       
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
