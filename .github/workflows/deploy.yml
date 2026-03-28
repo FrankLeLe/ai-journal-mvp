@@ -12,6 +12,10 @@ jobs:
       contents: read
       deployments: write
     
+    defaults:
+      run:
+        working-directory: ./
+    
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -30,33 +34,14 @@ jobs:
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
       
-      - name: Build
-        run: npx next build
-      
-      - name: Debug build output
-        run: |
-          echo "=== 当前目录 ==="
-          pwd
-          echo "=== 列出所有目录 ==="
-          ls -la
-          echo "=== 检查 .next 目录 ==="
-          ls -la .next/ 2>/dev/null || echo ".next 不存在"
-          echo "=== 检查 out 目录 ==="
-          ls -la out/ 2>/dev/null || echo "out 不存在"
-          echo "=== 查找 index.html ==="
-          find . -name "index.html" -type f 2>/dev/null | head -10
+      - name: Build (disable Turbopack for static export)
+        run: NODE_OPTIONS="--no-experimental-require-module" npx --no-install next build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
       
       - name: Deploy to Cloudflare Pages
-        run: |
-          echo "=== 开始部署 ==="
-          # 尝试部署 out 目录或 .next 目录
-          if [ -d "out" ] && [ -f "out/index.html" ]; then
-            echo "部署 out 目录"
-            npx wrangler pages deploy out --project-name=ai-journal-mvp --branch=main
-          elif [ -d ".next" ] && [ -f ".next/static" ]; then
-            echo "部署 .next 目录"
-            npx wrangler pages deploy .next --project-name=ai-journal-mvp --branch=main
-          else
-            echo "❌ 没有找到可部署的目录"
-            exit 1
-          fi
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy out --project-name=ai-journal-mvp --branch=main
